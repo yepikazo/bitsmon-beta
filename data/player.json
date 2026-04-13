@@ -1,0 +1,19 @@
+{
+    "name": "Pyronix",
+    "hp": 120,
+    "attack": 25,
+    "sp": 2,
+    "energy": 90,
+    "skills": [
+        {
+            "name": "Fire Slash",
+            "damage": 40,
+            "cost": 1
+        },
+        {
+            "name": "Blaze Strike",
+            "damage": 30,
+            "cost": 1
+        }
+    ]
+}
