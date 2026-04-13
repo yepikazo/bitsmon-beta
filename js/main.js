@@ -1,5 +1,6 @@
 import { loadJSON } from './loader.js';
 import { battleTurn } from './core/battle.js';
+import { setAIMode, AI_MODE } from './ai/config.js';
 
 async function run() {
 
@@ -10,6 +11,8 @@ async function run() {
     console.log("ENEMY:", enemy);
 
     console.log("=== Battle Start ===");
+
+    setAIMode(AI_MODE.GREEDY);
 
     let turn = 1;
 

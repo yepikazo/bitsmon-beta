@@ -1,59 +1,58 @@
 export function cloneState(player, enemy) {
-    if (!player || !enemy) {
-        throw new Error("STATE ERROR: player/enemy undefined");
-    }
-
     return {
-        player: JSON.parse(JSON.stringify(player)),
-        enemy: JSON.parse(JSON.stringify(enemy))
+        player: structuredClone(player),
+        enemy: structuredClone(enemy)
     };
 }
 
 export function getPossibleActions(player) {
+
     let actions = [];
 
     actions.push({ type: "basic" });
 
-    if (player.sp > 0 && player.skills) {
-        player.skills.forEach(skill => {
-            if (player.sp >= skill.cost) {
-                actions.push({ type: "skill", skill });
-            }
-        });
-    }
+    actions.push({
+        type: "skill",
+        data: player.skills.skill
+    });
 
-    if (player.energy >= 100) {
-        actions.push({ type: "ultimate" });
+    if (player.energy >= player.skills.ultimate.cost) {
+        actions.push({
+            type: "ultimate",
+            data: player.skills.ultimate
+        });
     }
 
     return actions;
 }
 
-export function evaluateImmediate(action, player) {
+export function evaluateImmediate(action) {
+
     if (action.type === "ultimate") return 80;
-    if (action.type === "skill") return action.skill.damage;
-    return player.attack;
+    if (action.type === "skill") return 40;
+    return 25;
 }
 
 export function simulateAction(state, action) {
+
     let { player, enemy } = state;
     let damage = 0;
 
-    if (action.type === "ultimate") {
-        damage = 80;
-        player.energy = 0;
+    if (action.type === "basic") {
+        damage = player.attack;
+        player.energy += 20;
+        player.sp += 1;
     }
 
     else if (action.type === "skill") {
-        damage = action.skill.damage;
-        player.sp -= action.skill.cost;
+        damage = action.data.damage;
+        player.sp -= action.data.cost;
         player.energy += 30;
     }
 
-    else {
-        damage = player.attack;
-        player.sp += 1;
-        player.energy += 20;
+    else if (action.type === "ultimate") {
+        damage = action.data.damage;
+        player.energy = 0;
     }
 
     enemy.hp -= damage;

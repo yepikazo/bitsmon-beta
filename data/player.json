@@ -1,19 +1,19 @@
 {
-    "name": "Pyronix",
-    "hp": 120,
-    "attack": 25,
-    "sp": 2,
-    "energy": 90,
-    "skills": [
-        {
-            "name": "Fire Slash",
-            "damage": 40,
-            "cost": 1
-        },
-        {
-            "name": "Blaze Strike",
-            "damage": 30,
-            "cost": 1
-        }
-    ]
+  "name": "tengkorak biola",
+  "hp": 120,
+  "attack": 25,
+  "sp": 2,
+  "energy": 90,
+  "skills": {
+    "skill": {
+      "name": "lemparan biola",
+      "damage": 40,
+      "cost": 1
+    },
+    "ultimate": {
+      "name": "tendangan berbohong di bulan april",
+      "damage": 80,
+      "cost": 100
+    }
+  }
 }

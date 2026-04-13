@@ -6,26 +6,35 @@ import {
     simulateAction
 } from './helper.js';
 
+import { currentMode, AI_MODE } from './config.js';
+
 export function chooseAction(player, enemy) {
 
     let actions = getPossibleActions(player);
 
-    // greedy ranking
-    let ranked = actions.map(a => ({
+    let ranked = actions.map((a, i) => ({
         action: a,
-        value: evaluateImmediate(a, player)
+        value: evaluateImmediate(a),
+        index: i
     }));
 
-    ranked.sort((a, b) => b.value - a.value);
+    ranked.sort((a, b) => {
+        if (b.value !== a.value) return b.value - a.value;
+        return a.index - b.index;
+    });
 
-    let topActions = ranked.slice(0, 2);
+    // GREEDY ONLY
+    if (currentMode === AI_MODE.GREEDY) {
+        return ranked[0].action;
+    }
 
-    let bestAction = topActions[0].action;
+    // HYBRID (DP + GREEDY)
+    let bestAction = ranked[0].action;
     let bestScore = -Infinity;
 
-    for (let item of topActions) {
+    for (let item of ranked) {
 
-        let state = cloneState(player, enemy); // WAJIB duluan
+        let state = cloneState(player, enemy);
 
         let score =
             simulateAction(state, item.action) +

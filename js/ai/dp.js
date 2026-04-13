@@ -7,7 +7,8 @@ export function dp(state, depth) {
     }
 
     let actions = getPossibleActions(state.player);
-    let best = 0;
+
+    let best = -Infinity;
 
     for (let action of actions) {
 

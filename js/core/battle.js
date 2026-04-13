@@ -1,42 +1,35 @@
 import { chooseAction } from '../ai/decision.js';
-import { calculateDamage } from './damage.js';
 
 export function battleTurn(player, enemy) {
 
     let action = chooseAction(player, enemy);
 
-    let playerDamage = 0;
+    let damage = 0;
 
-    if (action.type === "ultimate") {
-        playerDamage = 80;
-        player.energy = 0;
-    }
-
-    else if (action.type === "skill") {
-        playerDamage = calculateDamage(player, enemy, action.skill);
-        player.sp -= action.skill.cost;
-        player.energy += 30;
-    }
-
-    else {
-        playerDamage = calculateDamage(player, enemy);
-        player.sp += 1;
+    if (action.type === "basic") {
+        damage = player.attack;
         player.energy += 20;
     }
 
-    enemy.hp -= playerDamage;
-
-    if (enemy.hp <= 0) {
-        return { result: "win" };
+    else if (action.type === "skill") {
+        damage = action.data.damage;
+        player.sp -= action.data.cost;
+        player.energy += 30;
     }
 
-    // enemy attack
-    let enemyDamage = calculateDamage(enemy, player);
+    else if (action.type === "ultimate") {
+        damage = action.data.damage;
+        player.energy = 0;
+    }
+
+    enemy.hp -= damage;
+
+    if (enemy.hp <= 0) return { result: "win" };
+
+    let enemyDamage = enemy.attack;
     player.hp -= enemyDamage;
 
-    if (player.hp <= 0) {
-        return { result: "lose" };
-    }
+    if (player.hp <= 0) return { result: "lose" };
 
     return {
         result: "continue",
