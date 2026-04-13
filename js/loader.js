@@ -1,7 +1,6 @@
-export function loadJSON(path) {
-    return new Promise((resolve, reject) => {
-        $.getJSON(path)
-            .done(data => resolve(data))
-            .fail(err => reject(err));
-    });
+import fs from "fs/promises";
+
+export async function loadJSON(path) {
+    const data = await fs.readFile(path, "utf-8");
+    return JSON.parse(data);
 }

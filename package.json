@@ -1,0 +1,22 @@
+{
+  "name": "bitsmon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node js/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yepikazo/bitsmon-beta.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yepikazo/bitsmon-beta/issues"
+  },
+  "homepage": "https://github.com/yepikazo/bitsmon-beta#readme"
+}

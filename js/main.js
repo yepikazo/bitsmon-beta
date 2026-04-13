@@ -1,19 +1,20 @@
 import { loadJSON } from './loader.js';
 import { battleTurn } from './core/battle.js';
 
-$(document).ready(async function () {
+async function run() {
 
-    const player = await loadJSON("data/player.json");
-    const enemy = await loadJSON("data/enemy.json");
+    const player = await loadJSON("./data/player.json");
+    const enemy = await loadJSON("./data/enemy.json");
 
-    // console.log("PLAYER:", player);
-    // console.log("ENEMY:", enemy);
+    console.log("PLAYER:", player);
+    console.log("ENEMY:", enemy);
 
     console.log("=== Battle Start ===");
 
     let turn = 1;
 
     while (true) {
+
         console.log("Turn", turn);
 
         let result = battleTurn(player, enemy);
@@ -26,5 +27,6 @@ $(document).ready(async function () {
 
         turn++;
     }
+}
 
-});
+run();
