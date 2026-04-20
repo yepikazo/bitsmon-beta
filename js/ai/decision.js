@@ -20,12 +20,13 @@ export function chooseAction(player, enemy) {
 
     ranked.sort((a, b) => b.value - a.value || a.index - b.index);
 
-    // GREEDY
     if (currentMode === AI_MODE.GREEDY) {
+        console.log("AI Mode: GREEDY");
         return ranked[0].action;
     }
 
-    // HYBRID
+    console.log("AI Mode: HYBRID");
+
     let bestAction = ranked[0].action;
     let bestScore = -Infinity;
 

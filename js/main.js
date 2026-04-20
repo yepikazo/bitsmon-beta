@@ -7,10 +7,12 @@ async function run() {
     const basePlayer = await loadJSON("./data/player.json");
     const enemies = await loadJSON("./data/enemies.json");
 
-    // coba dua mode
     for (let mode of [AI_MODE.GREEDY, AI_MODE.HYBRID]) {
 
-        console.log(`\n=== MODE: ${mode} ===`);
+        console.log(`\n======================`);
+        console.log(`MODE: ${mode}`);
+        console.log(`======================`);
+
         setMode(mode);
 
         let player = structuredClone(basePlayer);

@@ -2,17 +2,17 @@
   "name": "Pyronix",
   "hp": 120,
   "attack": 25,
-  "sp": 2,
-  "energy": 50,
+  "sp": 1,
+  "energy": 80,
   "skills": {
     "skill": {
       "name": "Fire Slash",
-      "damage": 45,
+      "damage": 50,
       "sp_cost": 1
     },
     "ultimate": {
       "name": "Inferno Burst",
-      "damage": 90,
+      "damage": 100,
       "energy_cost": 100
     }
   }
