@@ -1,34 +1,31 @@
 import { loadJSON } from './loader.js';
-import { battleTurn } from './core/battle.js';
-import { setAIMode, AI_MODE } from './ai/config.js';
+import { runBattle } from './core/battle.js';
+import { setMode, AI_MODE } from './ai/config.js';
 
 async function run() {
 
-    const player = await loadJSON("./data/player.json");
-    const enemy = await loadJSON("./data/enemy.json");
+    const basePlayer = await loadJSON("./data/player.json");
+    const enemies = await loadJSON("./data/enemies.json");
 
-    console.log("PLAYER:", player);
-    console.log("ENEMY:", enemy);
+    // coba dua mode
+    for (let mode of [AI_MODE.GREEDY, AI_MODE.HYBRID]) {
 
-    console.log("=== Battle Start ===");
+        console.log(`\n=== MODE: ${mode} ===`);
+        setMode(mode);
 
-    setAIMode(AI_MODE.GREEDY);
+        let player = structuredClone(basePlayer);
 
-    let turn = 1;
+        for (let enemyData of enemies) {
 
-    while (true) {
+            let enemy = structuredClone(enemyData);
 
-        console.log("Turn", turn);
+            let result = runBattle(player, enemy);
 
-        let result = battleTurn(player, enemy);
-        console.log(result);
-
-        if (result.result !== "continue") {
-            console.log("RESULT:", result.result);
-            break;
+            if (!result) {
+                console.log("GAME OVER");
+                break;
+            }
         }
-
-        turn++;
     }
 }
 

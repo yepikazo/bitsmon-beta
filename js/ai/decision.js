@@ -14,21 +14,18 @@ export function chooseAction(player, enemy) {
 
     let ranked = actions.map((a, i) => ({
         action: a,
-        value: evaluateImmediate(a),
+        value: evaluateImmediate(a, player),
         index: i
     }));
 
-    ranked.sort((a, b) => {
-        if (b.value !== a.value) return b.value - a.value;
-        return a.index - b.index;
-    });
+    ranked.sort((a, b) => b.value - a.value || a.index - b.index);
 
-    // GREEDY ONLY
+    // GREEDY
     if (currentMode === AI_MODE.GREEDY) {
         return ranked[0].action;
     }
 
-    // HYBRID (DP + GREEDY)
+    // HYBRID
     let bestAction = ranked[0].action;
     let bestScore = -Infinity;
 

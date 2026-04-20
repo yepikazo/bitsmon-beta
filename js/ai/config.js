@@ -5,6 +5,6 @@ export const AI_MODE = {
 
 export let currentMode = AI_MODE.HYBRID;
 
-export function setAIMode(mode) {
+export function setMode(mode) {
     currentMode = mode;
 }

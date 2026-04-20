@@ -7,19 +7,18 @@ export function dp(state, depth) {
     }
 
     let actions = getPossibleActions(state.player);
-
     let best = -Infinity;
 
     for (let action of actions) {
 
         let newState = cloneState(state.player, state.enemy);
 
-        let score =
+        let value =
             simulateAction(newState, action) +
             dp(newState, depth - 1);
 
-        if (score > best) {
-            best = score;
+        if (value > best) {
+            best = value;
         }
     }
 

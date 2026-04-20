@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Florabeast",
+        "hp": 100,
+        "attack": 18
+    },
+    {
+        "name": "Tankosaur",
+        "hp": 160,
+        "attack": 15
+    },
+    {
+        "name": "Glass Specter",
+        "hp": 70,
+        "attack": 30
+    }
+]
