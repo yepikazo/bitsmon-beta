@@ -1,17 +1,17 @@
 {
-  "name": "Pyronix",
+  "name": "The Strangehaired Man",
   "hp": 120,
   "attack": 25,
   "sp": 1,
   "energy": 80,
   "skills": {
     "skill": {
-      "name": "Fire Slash",
+      "name": "Rational Diamond",
       "damage": 50,
       "sp_cost": 1
     },
     "ultimate": {
-      "name": "Inferno Burst",
+      "name": "Radodododododododododododo",
       "damage": 100,
       "energy_cost": 100
     }
