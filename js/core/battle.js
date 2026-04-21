@@ -9,8 +9,8 @@ export function runBattle(player, enemy) {
     while (true) {
 
         console.log(`\nTurn ${turn}`);
-        console.log(`Player HP: ${player.hp} | SP: ${player.sp} | Energy: ${player.energy}`);
-        console.log(`Enemy HP: ${enemy.hp}`);
+        console.log(`HP player: ${player.hp} | SP: ${player.sp} | Energy: ${player.energy}`);
+        console.log(`HP musuh: ${enemy.hp}`);
 
         let action = chooseAction(player, enemy);
         let damage = 0;
@@ -20,7 +20,7 @@ export function runBattle(player, enemy) {
             player.energy += 20;
             player.sp += 1;
 
-            console.log(`AI uses BASIC ATTACK`);
+            console.log(`AI menggunakan BASIC ATTACK`);
         }
 
         else if (action.type === "skill") {
@@ -28,7 +28,7 @@ export function runBattle(player, enemy) {
             player.sp -= action.data.sp_cost;
             player.energy += 25;
 
-            console.log(`AI uses SKILL: ${action.data.name}`);
+            console.log(`AI menggunakan SKILL : ${action.data.name}`);
             console.log(`SP Cost: ${action.data.sp_cost}`);
         }
 
@@ -36,16 +36,16 @@ export function runBattle(player, enemy) {
             damage = action.data.damage;
             player.energy -= action.data.energy_cost;
 
-            console.log(`AI uses ULTIMATE: ${action.data.name}`);
+            console.log(`AI menggunakan ULTIMATE: ${action.data.name}`);
             console.log(`Energy Cost: ${action.data.energy_cost}`);
         }
 
         enemy.hp -= damage;
 
-        console.log(`Damage Dealt: ${damage}`);
+        console.log(`damage diberikan: ${damage}`);
 
         if (enemy.hp <= 0) {
-            console.log(`${enemy.name} defeated`);
+            console.log(`${enemy.name} dikalahkan`);
             return true;
         }
 
@@ -54,7 +54,7 @@ export function runBattle(player, enemy) {
         console.log(`Enemy attacks: ${enemy.attack}`);
 
         if (player.hp <= 0) {
-            console.log("Player defeated");
+            console.log("Player Kalah");
             return false;
         }
 
