@@ -7,7 +7,8 @@ async function run() {
     const basePlayer = await loadJSON("./data/player.json");
     const enemies = await loadJSON("./data/enemies.json");
 
-    for (let mode of [AI_MODE.GREEDY, AI_MODE.HYBRID]) {
+    // for (let mode of [AI_MODE.GREEDY, AI_MODE.HYBRID]) {
+    let mode = AI_MODE.HYBRID
 
         console.log(`\n======================`);
         console.log(`MODE: ${mode}`);
@@ -28,7 +29,7 @@ async function run() {
                 break;
             }
         }
-    }
+    // }
 }
 
 run();

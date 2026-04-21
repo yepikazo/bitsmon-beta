@@ -1,16 +1,16 @@
 [
     {
-        "name": "Scout Slime",
+        "name": "slime biru",
         "hp": 60,
         "attack": 10
     },
     {
-        "name": "Tankosaur",
+        "name": "slime tanah",
         "hp": 180,
         "attack": 15
     },
     {
-        "name": "Glass Specter",
+        "name": "slime api",
         "hp": 80,
         "attack": 35
     }
