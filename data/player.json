@@ -1,0 +1,19 @@
+{
+    "name": "Si Rambut Aneh",
+    "hp": 150,
+    "attack": 25,
+    "sp": 1,
+    "energy": 50,
+    "skills": {
+        "skill": {
+            "name": "Pukulan Berlian",
+            "damage": 55,
+            "sp_cost": 1
+        },
+        "ultimate": {
+            "name": "Pukulan 7 Halaman",
+            "damage": 160,
+            "energy_cost": 100
+        }
+    }
+}
