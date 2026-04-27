@@ -137,9 +137,3 @@ export function exhaustiveSearch(player, enemy, depth, nextEnemyHp = 0, nextEnem
 
     return best;
 }
-
-// ─── simulateAction: wrapper untuk kompatibilitas dp.js (tidak aktif) ────────
-export function simulateAction(state, action, nextEnemyHp = 0, nextEnemyAtk = 0) {
-    applyAction(state.player, state.enemy, action);
-    return 0;
-}
