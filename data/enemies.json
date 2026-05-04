@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Slime Kecil",
+        "hp": 30,
+        "attack": 5
+    },
+    {
+        "name": "Slime Batu",
+        "hp": 110,
+        "attack": 8
+    },
+    {
+        "name": "Slime Api",
+        "hp": 50,
+        "attack": 35
+    },
+    {
+        "name": "Raja Slime",
+        "hp": 280,
+        "attack": 22
+    }
+]
