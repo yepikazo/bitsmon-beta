@@ -1,0 +1,537 @@
+/* =====================================================
+   BITSMON BATTLE — battle.css
+   Modular stylesheet untuk bitsmon-battle.html
+   ===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap');
+
+/* ── CSS VARIABLES ── */
+:root {
+  --bg: #0a0a1a;
+  --bg2: #0f0f2a;
+  --panel: #12122a;
+  --border: #2a2a5a;
+  --border2: #4a4a8a;
+  --accent: #f0c000;
+  --accent2: #ff6040;
+  --green: #40e060;
+  --red: #ff4040;
+  --blue: #4080ff;
+  --purple: #c060ff;
+  --teal: #00d4aa;
+  --text: #e0e0ff;
+  --textdim: #8080aa;
+}
+
+/* ── RESET ── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  image-rendering: pixelated;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+#header {
+  text-align: center;
+  padding: 12px 0 8px;
+  background: linear-gradient(180deg, #1a0030 0%, var(--bg) 100%);
+  border-bottom: 2px solid var(--border);
+  position: relative;
+}
+
+#header h1 {
+  font-size: 18px;
+  color: var(--accent);
+  text-shadow: 0 0 20px #f0c00088, 3px 3px 0 #802000;
+  letter-spacing: 4px;
+}
+
+#header .subtitle {
+  color: var(--textdim);
+  font-size: 7px;
+  margin-top: 4px;
+  letter-spacing: 2px;
+}
+
+.mode-badge {
+  display: inline-block;
+  background: var(--purple);
+  color: #fff;
+  font-size: 6px;
+  padding: 2px 6px;
+  margin-top: 6px;
+  border: 1px solid #ff80ff;
+}
+
+/* ── MAIN LAYOUT ── */
+#game-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  grid-template-rows: auto auto auto;
+  gap: 8px;
+  padding: 8px;
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
+/* ── CANVAS AREA ── */
+#canvas-wrap {
+  grid-column: 1;
+  grid-row: 1;
+  background: var(--panel);
+  border: 3px solid var(--border2);
+  border-image: repeating-linear-gradient(90deg, var(--border2) 0 2px, transparent 2px 4px) 3;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+  box-shadow: inset 0 0 8px #00000066;
+}
+
+#battleCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 700px;
+}
+
+/* ── WAVE INDICATORS ── */
+#wave-bar {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 12px;
+  background: var(--panel);
+  border: 2px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.wave-dot {
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--border2);
+  background: var(--bg);
+  transition: background .3s;
+  image-rendering: pixelated;
+}
+
+.wave-dot.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+}
+
+.wave-dot.done {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.wave-dot.fail {
+  background: var(--red);
+  border-color: var(--red);
+}
+
+#wave-label {
+  font-size: 7px;
+  color: var(--textdim);
+  margin-left: 4px;
+}
+
+#wave-name {
+  font-size: 8px;
+  color: var(--accent);
+  margin-left: auto;
+}
+
+/* ── STATS PANEL ── */
+#stats-panel {
+  grid-column: 1;
+  grid-row: 3;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.stat-box {
+  background: var(--panel);
+  border: 2px solid var(--border);
+  padding: 10px 12px;
+  box-shadow: inset 0 0 6px #00000033;
+}
+
+.stat-box h3 {
+  font-size: 7px;
+  color: var(--accent);
+  margin: 0 0 8px 0;
+  letter-spacing: 1px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.stat-label {
+  font-size: 6px;
+  color: var(--textdim);
+}
+
+.stat-val {
+  font-size: 7px;
+  color: var(--text);
+  font-weight: bold;
+}
+
+.bar-wrap {
+  width: 100%;
+  height: 10px;
+  background: #000;
+  border: 1px solid var(--border2);
+  margin-top: 3px;
+  border-radius: 2px;
+}
+
+.bar-fill {
+  height: 100%;
+  transition: width .4s;
+  border-radius: 1px;
+}
+
+.bar-hp  { background: linear-gradient(90deg, var(--green), #20c040); }
+.bar-ep  { background: linear-gradient(90deg, var(--blue), #2080ff); }
+.bar-sp-bar { background: linear-gradient(90deg, var(--purple), #d080ff); }
+.enemy-hp-bar { background: linear-gradient(90deg, var(--red), #ff2020); }
+
+/* ── RIGHT PANEL ── */
+#right-panel {
+  grid-column: 2;
+  grid-row: 1 / 4;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+}
+
+/* ── BATTLE LOG ── */
+#log-box {
+  flex: 1;
+  background: var(--panel);
+  border: 3px solid var(--border2);
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
+  max-height: 420px;
+  box-shadow: inset 0 0 8px #00000066;
+}
+
+#log-box h3 {
+  font-size: 7px;
+  color: var(--accent);
+  padding: 8px 10px;
+  border-bottom: 2px solid var(--border2);
+  margin: 0;
+  flex-shrink: 0;
+  text-shadow: 0 0 8px var(--accent);
+  letter-spacing: 2px;
+}
+
+#log-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 8px 10px;
+  font-family: 'VT323', monospace;
+  font-size: 14px;
+  line-height: 1.8;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border2) var(--bg);
+}
+
+#log-scroll::-webkit-scrollbar       { width: 8px; }
+#log-scroll::-webkit-scrollbar-track { background: var(--bg); border-left: 1px solid var(--border); }
+#log-scroll::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; border: 1px solid var(--border); }
+#log-scroll::-webkit-scrollbar-thumb:hover { background: var(--accent2); }
+
+/* ── LOG LINE TYPES ── */
+.log-line     { margin-bottom: 3px; padding: 2px 0; word-wrap: break-word; white-space: normal; }
+.log-basic    { color: #c0c0ff; }
+.log-skill    { color: var(--teal); font-weight: bold; }
+.log-ultimate { color: var(--accent); text-shadow: 0 0 8px var(--accent); font-weight: bold; }
+.log-enemy    { color: var(--red); }
+.log-system   { color: var(--textdim); font-size: 12px; }
+.log-win      { color: var(--green); font-size: 16px; font-weight: bold; margin: 4px 0; }
+.log-lose     { color: var(--red); font-weight: bold; }
+.log-wave     { color: var(--purple); border-top: 2px solid var(--border2); margin-top: 8px; padding-top: 6px; font-weight: bold; }
+
+/* ── DAMAGE CHART (mini) ── */
+#chart-box {
+  background: var(--panel);
+  border: 2px solid var(--border);
+  padding: 8px;
+  flex-shrink: 0;
+  min-height: 140px;
+}
+
+#chart-box h3 {
+  font-size: 7px;
+  color: var(--accent);
+  margin: 0 0 8px 0;
+  letter-spacing: 1px;
+}
+
+#dmgChart {
+  display: block;
+  width: 100%;
+  height: 100px;
+}
+
+/* ── LARGE DAMAGE CHART ── */
+#chart-main {
+  max-width: 1150px;
+  margin: 8px auto;
+  padding: 0 8px;
+  display: none;
+}
+
+#chart-main.show { display: block; }
+
+#chart-main-box {
+  background: var(--panel);
+  border: 3px solid var(--border2);
+  padding: 16px;
+  box-shadow: inset 0 0 8px #00000066;
+}
+
+#chart-main-box h3 {
+  font-size: 8px;
+  color: var(--accent);
+  margin: 0 0 16px 0;
+  letter-spacing: 2px;
+  text-shadow: 0 0 8px var(--accent);
+}
+
+#dmgChartMain {
+  display: block;
+  width: 100%;
+  height: 300px;
+}
+
+/* ── CONTROLS ── */
+#controls {
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+  background: var(--panel);
+  border: 2px solid var(--border);
+  padding: 8px;
+  flex-shrink: 0;
+}
+
+.mode-sel { display: flex; gap: 8px; }
+
+.mode-btn {
+  flex: 1;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 6px;
+  padding: 6px 4px;
+  background: var(--bg);
+  border: 2px solid var(--border2);
+  color: var(--textdim);
+  cursor: pointer;
+  transition: all .2s;
+  letter-spacing: 1px;
+}
+
+.mode-btn:hover { border-color: #ff80ff; color: #fff; }
+
+.mode-btn.selected {
+  background: var(--purple);
+  border-color: #ff80ff;
+  color: #fff;
+  box-shadow: 0 0 12px #ff80ff88;
+}
+
+.btn-row { display: flex; gap: 8px; }
+
+.btn {
+  flex: 1;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  padding: 10px 6px;
+  cursor: pointer;
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  transition: transform .1s;
+  border-radius: 2px;
+}
+
+.btn:active { transform: translateY(2px); }
+
+.btn-start {
+  background: var(--green);
+  color: #001a00;
+  box-shadow: 0 4px 0 #006000, 0 0 16px #00ff0055;
+  font-weight: bold;
+}
+
+.btn-start:hover       { box-shadow: 0 4px 0 #006000, 0 0 24px #00ff0099; }
+.btn-start:active      { box-shadow: 0 2px 0 #006000, 0 0 16px #00ff0055; }
+
+.btn-pause {
+  background: var(--accent);
+  color: #1a0000;
+  box-shadow: 0 4px 0 #806000, 0 0 16px #f0c00055;
+  font-weight: bold;
+}
+
+.btn-pause:hover:not(:disabled)  { box-shadow: 0 4px 0 #806000, 0 0 24px #f0c00099; }
+.btn-pause:active:not(:disabled) { box-shadow: 0 2px 0 #806000, 0 0 16px #f0c00055; }
+
+.btn-pause:disabled {
+  background: #333;
+  color: #666;
+  box-shadow: 0 2px 0 #1a1a1a;
+  cursor: not-allowed;
+}
+
+/* ── SCORE MODAL ── */
+#score-modal {
+  display: none;
+  max-width: 1150px;
+  margin: 8px auto;
+  padding: 0 8px;
+}
+
+#score-modal.show { display: block; }
+
+#score-card {
+  background: var(--panel);
+  border: 4px solid var(--accent);
+  padding: 28px 36px;
+  text-align: center;
+  width: 100%;
+  box-shadow: 0 0 40px var(--accent), inset 0 0 20px #ffffff08;
+  border-radius: 2px;
+}
+
+@keyframes popIn {
+  from { transform: scale(.5); opacity: 0; }
+  to   { transform: scale(1);  opacity: 1; }
+}
+
+#score-card h2 {
+  font-size: 16px;
+  color: var(--accent);
+  margin: 0 0 20px 0;
+  text-shadow: 0 0 20px var(--accent);
+}
+
+.score-row   { display: flex; justify-content: space-between; margin: 8px 0; font-size: 8px; }
+.score-sep   { border: none; border-top: 2px solid var(--border2); margin: 12px 0; }
+.score-total { font-size: 14px; color: var(--accent); font-weight: bold; }
+.score-formula { font-size: 6px; color: var(--textdim); margin-top: 10px; }
+
+.btn-close-score {
+  margin-top: 20px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  padding: 10px 20px;
+  background: var(--accent2);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #802000, 0 0 20px #ff604044;
+  transition: all .1s;
+}
+
+.btn-close-score:hover  { box-shadow: 0 4px 0 #802000, 0 0 30px #ff604088; }
+.btn-close-score:active { transform: translateY(2px); box-shadow: 0 2px 0 #802000, 0 0 20px #ff604044; }
+
+/* ── TUTORIAL SECTION ── */
+#tutorial {
+  max-width: 1100px;
+  margin: 16px auto 0;
+  padding: 0 8px 32px;
+}
+
+#tutorial-toggle {
+  width: 100%;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  padding: 10px;
+  background: var(--bg2);
+  border: 2px solid var(--border);
+  color: var(--accent);
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+}
+
+#tutorial-body {
+  display: none;
+  background: var(--panel);
+  border: 2px solid var(--border);
+  border-top: none;
+  padding: 20px;
+  font-family: 'VT323', monospace;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+#tutorial-body.open { display: block; }
+
+.tut-step {
+  margin-bottom: 24px;
+  border-left: 3px solid var(--accent);
+  padding-left: 16px;
+}
+
+.tut-step h4 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.tut-step p  { color: var(--text); margin-bottom: 6px; }
+
+.tut-code {
+  background: #000;
+  border: 1px solid var(--border2);
+  padding: 10px;
+  margin: 8px 0;
+  font-size: 13px;
+  color: var(--teal);
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.tut-note {
+  color: var(--accent);
+  background: #1a1000;
+  border-left: 3px solid var(--accent);
+  padding: 6px 10px;
+  margin: 6px 0;
+}
+
+.tut-file { color: var(--purple); }
