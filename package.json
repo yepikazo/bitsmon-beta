@@ -9,7 +9,8 @@
     "battle":  "node js/main.js",
     "compare": "node js/main.js --compare",
     "greedy":  "node js/main.js --mode greedy",
-    "hybrid":  "node js/main.js --mode hybrid"
+    "hybrid":  "node js/main.js --mode hybrid",
+    "serve":   "npx serve ."
   },
   "license": "ISC"
 }
